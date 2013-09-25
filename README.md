@@ -20,7 +20,22 @@ var Project = gamos.Model.define('Project', {
 var Task = gamos.Models.define('Task', {
   title: gamos.dataType.STRING,
   description: gamos.dataTypes.TEXT,
-  deadline: gamos.dataTypes.DATE
+  deadline: {
+    type: gamos.dataTypes.DATE,
+    validation: function (value) {
+      return isDate(value);
+    }
+  },
+  project: Project
+});
+```
+Alternatively:
+```js
+var Project = gamos.Model.define('Project', {
+  title: gamos.dataTypes.STRING,
+  description: gamos.dataTypes.TEXT
+}, {
+  hasMany: Task
 });
 ```
 
